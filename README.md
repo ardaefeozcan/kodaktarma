@@ -7,7 +7,7 @@ from urllib.parse import urljoin
 import time
 import os
 
-# Tarayıcı ve Selenium ayarları
+Tarayıcı ve Selenium ayarları
 service = Service("path/to/chromedriver")  # ChromeDriver yolunu belirtin
 driver = webdriver.Chrome(service=service)
 
