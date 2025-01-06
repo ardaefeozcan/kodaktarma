@@ -1,20 +1,18 @@
-# kodaktarma
-
-rom selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 from urllib.parse import urljoin
 import time
 import os
 
-Tarayıcı ve Selenium ayarları
-service = Service("path/to/chromedriver")  # ChromeDriver yolunu belirtin
-driver = webdriver.Chrome(service=service)
+# Tarayıcı ve WebDriver ayarları
+service = Service("/usr/local/bin/geckodriver")  # GeckoDriver yolunu doğru yola göre değiştirin
+driver = webdriver.Firefox(service=service)
 
 # Web sayfasını aç
-url = "https://example.com"  # Hedef sayfanın URL'sini buraya yazın
+url = "https://example.com"  # Hedef web sayfasının URL'sini buraya yazın
 driver.get(url)
-time.sleep(5)  # Sayfanın yüklenmesi için bekle
+time.sleep(5)  # JavaScript'in yüklenmesi için bekle
 
 # Videoların bağlantılarını bul
 video_links = []
@@ -39,7 +37,7 @@ else:
     print("Hiçbir .mp4 bağlantısı bulunamadı.")
     exit()
 
-# VLC ile yayın yap
+# VLC ile video oynatma
 playlist_path = "video_links.txt"
 
 # VLC oynatma komutu
