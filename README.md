@@ -1,3 +1,19 @@
+import subprocess
+
+# Pip3'ün tam yolunu belirleme
+pip3_path = "/usr/bin/pip3"
+
+# Selenium'un yüklü olup olmadığını kontrol etme
+try:
+    import selenium
+    print("Selenium modülü yüklü.")
+except ModuleNotFoundError:
+    print("Selenium modülü bulunamadı. Yükleniyor...")
+    # Selenium'u yüklemek için pip3 kullanımı
+    subprocess.run([pip3_path, "install", "selenium"], check=True)
+    print("Selenium başarıyla yüklendi!")
+
+# Selenium'u kullanarak işlem yapma
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
@@ -5,14 +21,17 @@ from urllib.parse import urljoin
 import time
 import os
 
-# Tarayıcı ve WebDriver ayarları
-service = Service("/usr/local/bin/geckodriver")  # GeckoDriver yolunu doğru yola göre değiştirin
+# GeckoDriver'ın yolu
+geckodriver_path = "/usr/local/bin/geckodriver"
+
+# Firefox WebDriver ayarları
+service = Service(geckodriver_path)
 driver = webdriver.Firefox(service=service)
 
 # Web sayfasını aç
-url = "https://example.com"  # Hedef web sayfasının URL'sini buraya yazın
+url = "https://example.com"  # Hedef URL'yi buraya yazın
 driver.get(url)
-time.sleep(5)  # JavaScript'in yüklenmesi için bekle
+time.sleep(5)  # Sayfanın yüklenmesi için bekle
 
 # Videoların bağlantılarını bul
 video_links = []
